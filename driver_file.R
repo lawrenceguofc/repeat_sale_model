@@ -1,3 +1,6 @@
+######## This is the driver file
+########
+########
 library(readxl)
 library(data.table)
 options(warn=-1)
@@ -71,7 +74,5 @@ rpi_cnty_dt <- Reduce(function(x,y) rbindlist(list(x,y),fill=TRUE),rpi_cnty_ls2)
 colnames(rpi_cnty_dt)[1] <- 'fip'
 rpi_cnty_dt <- merge(data.frame(rpi_cnty_dt),data.frame(map),by.x='fip',by.y='fips')
 
-
-rpi_msa_dt = readRDS()
                       
 

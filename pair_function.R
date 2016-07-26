@@ -63,7 +63,7 @@ pair_function <- function(sale,fips = msa_fips_code){
     # calculate median price change by change
     sale_com[,px.change:= round((sale_amount_s2/sale_amount_s1)^(12/month_diff)-1,4)]
     # remove 5% to 95%
-    px.ch.lim <- quantile(sale_com$px.change,probs=c(0.05,0.95))
+    px.ch.lim <- quantile(sale_com$px.change,probs=c(0.05,0.95),na.rm=TRUE)
     sale_com <- sale_com[px.change>px.ch.lim[1]&px.change<px.ch.lim[2],]
     sale_com$unique_id <- seq_len(nrow(sale_com))
     # remove sale if the zip doesn't equal to eachother

@@ -13,22 +13,22 @@ map <- map[!is.na(map$fips),]
 # change FIP code for Miami Date County
 map[map$county=='Miami-Dade County','fips'] = '12025'
 
-setwd('/Users/lguo/Documents/Core Logic/')
+setwd('/Users/lguo/Documents/rpi/')
 source('repeat_sale_pairing_function_cbsa.R') 
 source('pair_function.R')
 source('calculate_index.R')
-
-
 
 # try for each cbsa code
 all_cbsa <- unique(map[map$msa=='Metropolitan Statistical Area',]$cbsa_code)
 all_fip <- unique(map$fips)
 
-rpi_msa_ls <- lapply(msa_code,function(cbsa_code){
+# pull 
+
+rpi_msa_ls <- lapply(all_cbsa[1:2],function(cbsa_code){
   print (cbsa_code)
-  try(repeat_sale_pair(cbsa_code=cbsa_code),silent=FALSE)
+  try(repeat_sale_pair(cbsa_code=cbsa_code,month = 'Apr 2016'),silent=FALSE)
   })
-names(rpi_msa_ls) <- msa_code
+names(rpi_msa_ls) <- all_cbsa
 # function to convert a ts object to data.frame object
 ts_to_df <- function(i,list){
  cbsa_code = names(list[i])
